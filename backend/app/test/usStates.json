@@ -1,0 +1,22 @@
+[
+  {
+    "state": "NJ",
+    "capital": "Trenton",
+    "governor": "Phil Murphy"
+  },
+  {
+    "state": "CT",
+    "capital": "Hartford",
+    "governor": "Ned Lamont"
+  },
+  {
+    "state": "NY",
+    "capital": "Albany",
+    "governor": "Andrew Cuomo"
+  },
+  {
+    "state": "AL",
+    "capital": "Montgomery",
+    "governor": "Kay Ivey"
+  }
+]
