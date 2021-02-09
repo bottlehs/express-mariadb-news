@@ -140,6 +140,20 @@ export default {
         },
         {
           /**
+           * 생성날자
+           */
+          key: "createdAt",
+          label: this.$t("inquires_created_at")
+        },
+        {
+          /**
+           * 수정날짜
+           */
+          key: "updatedAt",
+          label: this.$t("inquires_updated_at")
+        },
+        {
+          /**
            * Action
            */
           key: "actions",

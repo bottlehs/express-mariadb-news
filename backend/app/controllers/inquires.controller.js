@@ -26,7 +26,7 @@ exports.create = (req, res, next) => {
         return;
       });
   }
-    
+
   if (!req.body.question) {
     res.status(400).send({
       message: "Content can not be empty!",

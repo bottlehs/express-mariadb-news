@@ -7,69 +7,69 @@
       <ValidationObserver v-slot="{ invalid }">
         <b-form @submit.prevent="onSubmit" @reset="onReset">
           <ValidationProvider
-            ref="validationFormUsersId"
-            :name="$t('inquires_users_id')"
+            ref="validationFormName"
+            :name="$t('categories_name')"
             rules="required"
             v-slot="{ errors }"
           >
             <label>
-              {{ $t("inquires_users_id") }}
+              {{ $t("categories_name") }}
               <input
-                ref="formUsersId"
+                ref="formName"
                 type="text"
-                v-model="form.usersId"
-                :placeholder="$t('inquires_users_id')"
+                v-model="form.name"
+                :placeholder="$t('categories_name')"
               />
               {{ errors[0] }}
             </label>
           </ValidationProvider>
           <ValidationProvider
-            ref="validationFormQuestion"
-            :name="$t('inquires_question')"
+            ref="validationFormBackgroundColor"
+            :name="$t('categories_background_color')"
             rules="required"
             v-slot="{ errors }"
           >
             <label>
-              {{ $t("inquires_question") }}
+              {{ $t("categories_background_color") }}
               <input
-                ref="formQuestion"
+                ref="formBackgroundColor"
                 type="text"
-                v-model="form.question"
-                :placeholder="$t('inquires_question')"
+                v-model="form.backgroundColor"
+                :placeholder="$t('categories_background_color')"
               />
               {{ errors[0] }}
             </label>
           </ValidationProvider>
           <ValidationProvider
-            ref="validationFormAnswer"
-            :name="$t('inquires_answer')"
+            ref="validationFormIcon"
+            :name="$t('categories_icon')"
             rules="required"
             v-slot="{ errors }"
           >
             <label>
-              {{ $t("inquires_answer") }}
+              {{ $t("categories_icon") }}
               <input
-                ref="formAnswer"
+                ref="formIcon"
                 type="text"
-                v-model="form.answer"
-                :placeholder="$t('inquires_answer')"
+                v-model="form.icon"
+                :placeholder="$t('categories_icon')"
               />
               {{ errors[0] }}
             </label>
           </ValidationProvider>
           <ValidationProvider
             ref="validationFormStatus"
-            :name="$t('inquires_status')"
+            :name="$t('categories_status')"
             rules="required"
             v-slot="{ errors }"
           >
             <label>
-              {{ $t("inquires_status") }}
+              {{ $t("categories_status") }}
               <input
                 ref="formStatus"
                 type="text"
                 v-model="form.status"
-                :placeholder="$t('inquires_status')"
+                :placeholder="$t('categories_status')"
               />
               {{ errors[0] }}
             </label>
@@ -110,10 +110,10 @@ import { mapGetters } from "vuex";
 /**
  * service
  */
-import InquiresService from "@/services/inquires.service.js";
+import CategoriesService from "@/services/categories.service.js";
 
 export default {
-  name: "InquiresEdit",
+  name: "CategoriesEdit",
   components: {
     /**
      * components
@@ -128,7 +128,7 @@ export default {
        * id : 단건 식별자
        * item : 응답 데이터
        * wait : 로딩
-       * formWait : 폼 로딩
+       * formWait : 폼전송
        * formAction : 폼 액션
        * form : 폼
        */
@@ -139,17 +139,16 @@ export default {
       formAction: "",
       form: {
         /**
-         * usersId: users id (후보키)
-         * question: 질문
-         * answer: 답변
+         * name: 카테고리명
+         * backgroundColor: 카테고리 배경색(HEX)
+         * icon: 카테고리 아이콘
          * status: 상태
          */
-        usersId: "",
-        question: "",
-        answer: "",
+        name: "",
+        backgroundColor: "",
+        icon: "",
         status: ""
       },
-
       item: {}
     };
   },
@@ -194,15 +193,15 @@ export default {
       this.formAction = 'onSubmit';
 
       let params = {
-        usersId: this.form.usersId,
-        question: this.form.question,
-        answer: this.form.answer,
+        name: this.form.name,
+        backgroundColor: this.form.backgroundColor,
+        icon: this.form.icon,
         status: this.form.status
       };
 
       if (this.id) {
         // 수정
-        InquiresService.modify(this.id, params).then(
+        CategoriesService.modify(this.id, params).then(
           response => {
             const { data } = response;
             this.item = data;
@@ -219,7 +218,7 @@ export default {
         );
       } else {
         // 등록
-        InquiresService.add(params).then(
+        CategoriesService.add(params).then(
           response => {
             const { data } = response;
             this.item = data;
@@ -252,7 +251,7 @@ export default {
         this.formWait = true;
         this.formAction = 'remove';
 
-        InquiresService.remove(this.id).then(
+        CategoriesService.remove(this.id).then(
           response => {
             const { data } = response;
             this.item = data;
@@ -271,20 +270,20 @@ export default {
     },
     findOne() {
       this.wait = true;
-      InquiresService.findOne(this.id).then(
+      CategoriesService.findOne(this.id).then(
         response => {
           const { data } = response;
           this.item = data;
 
           // form
-          if (Object.prototype.hasOwnProperty.call(data, "usersId")) {
-            this.form.usersId = data.usersId;
+          if (Object.prototype.hasOwnProperty.call(data, "name")) {
+            this.form.name = data.name;
           }
-          if (Object.prototype.hasOwnProperty.call(data, "question")) {
-            this.form.question = data.question;
+          if (Object.prototype.hasOwnProperty.call(data, "backgroundColor")) {
+            this.form.backgroundColor = data.backgroundColor;
           }
-          if (Object.prototype.hasOwnProperty.call(data, "answer")) {
-            this.form.answer = data.answer;
+          if (Object.prototype.hasOwnProperty.call(data, "icon")) {
+            this.form.icon = data.icon;
           }
           if (Object.prototype.hasOwnProperty.call(data, "status")) {
             this.form.status = data.status;

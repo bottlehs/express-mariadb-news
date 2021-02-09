@@ -157,6 +157,20 @@ export default {
         },
         {
           /**
+           * 생성날자
+           */
+          key: "createdAt",
+          label: this.$t("posts_created_at")
+        },
+        {
+          /**
+           * 수정날짜
+           */
+          key: "updatedAt",
+          label: this.$t("posts_updated_at")
+        },
+        {
+          /**
            * Action
            */
           key: "actions",

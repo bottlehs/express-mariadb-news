@@ -25,7 +25,7 @@ exports.create = (req, res, next) => {
         return;
       });
   }
-  
+
   if (!req.body.postsId) {
     res.status(400).send({
       message: "Content can not be empty!",
@@ -80,7 +80,7 @@ exports.create = (req, res, next) => {
           message: "Content can not be empty!",
         });
         return;
-      });    
+      });
   }
 
   // Create a Comment
