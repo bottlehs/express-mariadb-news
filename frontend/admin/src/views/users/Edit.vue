@@ -144,7 +144,6 @@
             </label>
           </ValidationProvider>
 
-
           <b-button type="submit" :disabled="invalid || formWait">
             <b-spinner
               v-if="formWait && formAction == 'onSubmit'"
