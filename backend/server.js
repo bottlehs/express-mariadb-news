@@ -61,6 +61,7 @@ require("./app/routes/oauth.routes")(app);
 require("./app/routes/faqs.routes")(app);
 require("./app/routes/posts.routes")(app);
 require("./app/routes/comments.routes")(app);
+require("./app/routes/categories.routes")(app);
 
 // swagger
 const swaggerUi = require("swagger-ui-express");

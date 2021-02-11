@@ -35,11 +35,11 @@
           </div>
         </template>
         <template #cell(actions)="row">
-          <b-link :to="{ name: 'DeliveriesId', params: { id: row.item.id } }">
+          <b-link :to="{ name: 'CategoriesId', params: { id: row.item.id } }">
             <b-icon-search></b-icon-search>
           </b-link>
           <b-link
-            :to="{ name: 'DeliveriesEditId', params: { id: row.item.id } }"
+            :to="{ name: 'CategoriesEditId', params: { id: row.item.id } }"
           >
             <b-icon-pencil></b-icon-pencil>
           </b-link>
@@ -80,10 +80,10 @@ import { mapGetters } from "vuex";
 /**
  * service
  */
-import DeliveriesService from "@/services/deliveries.service.js";
+import CategoriesService from "@/services/categories.service.js";
 
 export default {
-  name: "DeliveriesList",
+  name: "CategoriesList",
   components: {
     /**
      * components
@@ -116,84 +116,43 @@ export default {
       fields: [
         {
           /**
-           * users id (후보키) */
-          key: "usersId",
-          label: this.$t("deliveries_users_id")
-        },
-        {
-          /**
-           * purchases id (후보키) */
-          key: "purchasesId",
-          label: this.$t("deliveries_purchases_id")
-        },
-        {
-          /**
-           * 주문자 이름 */
+           * 카테고리명 */
           key: "name",
-          label: this.$t("deliveries_name"),
+          label: this.$t("categories_name"),
           isSearch: true
         },
         {
           /**
-           * 주문자 Email */
-          key: "email",
-          label: this.$t("deliveries_email"),
-          isSearch: true
+           * 카테고리 배경색(HEX) */
+          key: "backgroundColor",
+          label: this.$t("categories_background_color")
         },
         {
           /**
-           * 주문자 연락처 */
-          key: "tel",
-          label: this.$t("deliveries_tel"),
-          isSearch: true
-        },
-        {
-          /**
-           * 주문자 국가 */
-          key: "country",
-          label: this.$t("deliveries_country")
-        },
-        {
-          /**
-           * 주문자 주소 */
-          key: "address",
-          label: this.$t("deliveries_address")
-        },
-        {
-          /**
-           * 주문자 상세 주소 */
-          key: "detailAddress",
-          label: this.$t("deliveries_detail_address")
-        },
-        {
-          /**
-           * 주문자 우편번호 */
-          key: "postcode",
-          label: this.$t("deliveries_postcode")
-        },
-        {
-          /**
-           * 배송택배사 */
-          key: "courier",
-          label: this.$t("deliveries_courier")
-        },
-        {
-          /**
-           * 운송장번호 */
-          key: "trackingNumber",
-          label: this.$t("deliveries_tracking_number")
-        },
-        {
-          /**
-           * 주문자 메모 */
-          key: "memo",
-          label: this.$t("deliveries_memo")
+           * 카테고리 아이콘 */
+          key: "icon",
+          label: this.$t("categories_icon")
         },
         {
           /**
            * 상태 */
           key: "status",
-          label: this.$t("deliveries_status")
+          label: this.$t("categories_status"),
+          isSearch: true
+        },
+        {
+          /**
+           * 생성날자
+           */
+          key: "createdAt",
+          label: this.$t("categories_created_at")
+        },
+        {
+          /**
+           * 수정날짜
+           */
+          key: "updatedAt",
+          label: this.$t("categories_updated_at")
         },
         {
           /**
@@ -297,7 +256,7 @@ export default {
         params[this.search.type] = this.search.q;
       }
 
-      DeliveriesService.findAll(params).then(
+      CategoriesService.findAll(params).then(
         response => {
           const { data } = response;
           this.totalItems = data.totalItems;
@@ -329,7 +288,7 @@ export default {
       query.page = pageNum;
 
       return {
-        path: "/deliveries/",
+        path: "/comments/",
         query: query
       };
     }

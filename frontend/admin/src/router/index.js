@@ -129,99 +129,51 @@ const routes = [
         beforeEnter: requireOauth()
       },
       /**
-       * Purchases
-       * /purchases : 다건 리스트 조회
-       * /purchases/edit : 단건 추가
-       * /purchases/:id : 단건 조회
-       * /purchases/edit/:id : 단건 수정
+       * Categories
+       * /categories : 다건 리스트 조회
+       * /categories/edit : 단건 추가
+       * /categories/:id : 단건 조회
+       * /categories/edit/:id : 단건 수정
        */
 
       {
-        path: "/purchases",
-        name: "Purchases",
+        path: "/categories",
+        name: "Categories",
         meta: {
-          title: title + " - purchases",
+          title: title + " - categories",
           breadcrumb: [{ name: "", link: "" }]
         },
-        component: () => import("../views/purchases/List.vue"),
+        component: () => import("../views/categories/List.vue"),
         beforeEnter: requireOauth()
       },
       {
-        path: "/purchases/edit",
-        name: "PurchasesEdit",
+        path: "/categories/edit",
+        name: "CategoriesEdit",
         meta: {
-          title: title + " - purchases id",
+          title: title + " - categories id",
           breadcrumb: [{ name: "", link: "" }]
         },
-        component: () => import("../views/purchases/Edit.vue"),
+        component: () => import("../views/categories/Edit.vue"),
         beforeEnter: requireOauth()
       },
       {
-        path: "/purchases/:id",
-        name: "PurchasesId",
+        path: "/categories/:id",
+        name: "CategoriesId",
         meta: {
-          title: title + " - purchases id",
+          title: title + " - categories id",
           breadcrumb: [{ name: "", link: "" }]
         },
-        component: () => import("../views/purchases/View.vue"),
+        component: () => import("../views/categories/View.vue"),
         beforeEnter: requireOauth()
       },
       {
-        path: "/purchases/edit/:id",
-        name: "PurchasesEditId",
+        path: "/categories/edit/:id",
+        name: "CategoriesEditId",
         meta: {
-          title: title + " - purchases id",
+          title: title + " - categories id",
           breadcrumb: [{ name: "", link: "" }]
         },
-        component: () => import("../views/purchases/Edit.vue"),
-        beforeEnter: requireOauth()
-      },
-      /**
-       * Products
-       * /products : 다건 리스트 조회
-       * /products/edit : 단건 추가
-       * /products/:id : 단건 조회
-       * /products/edit/:id : 단건 수정
-       */
-
-      {
-        path: "/products",
-        name: "Products",
-        meta: {
-          title: title + " - products",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/products/List.vue"),
-        beforeEnter: requireOauth()
-      },
-      {
-        path: "/products/edit",
-        name: "ProductsEdit",
-        meta: {
-          title: title + " - products id",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/products/Edit.vue"),
-        beforeEnter: requireOauth()
-      },
-      {
-        path: "/products/:id",
-        name: "ProductsId",
-        meta: {
-          title: title + " - products id",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/products/View.vue"),
-        beforeEnter: requireOauth()
-      },
-      {
-        path: "/products/edit/:id",
-        name: "ProductsEditId",
-        meta: {
-          title: title + " - products id",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/products/Edit.vue"),
+        component: () => import("../views/categories/Edit.vue"),
         beforeEnter: requireOauth()
       },
       /**
@@ -369,53 +321,6 @@ const routes = [
         beforeEnter: requireOauth()
       },
       /**
-       * Deliveries
-       * /deliveries : 다건 리스트 조회
-       * /deliveries/edit : 단건 추가
-       * /deliveries/:id : 단건 조회
-       * /deliveries/edit/:id : 단건 수정
-       */
-
-      {
-        path: "/deliveries",
-        name: "Deliveries",
-        meta: {
-          title: title + " - deliveries",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/deliveries/List.vue"),
-        beforeEnter: requireOauth()
-      },
-      {
-        path: "/deliveries/edit",
-        name: "DeliveriesEdit",
-        meta: {
-          title: title + " - deliveries id",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/deliveries/Edit.vue"),
-        beforeEnter: requireOauth()
-      },
-      {
-        path: "/deliveries/:id",
-        name: "DeliveriesId",
-        meta: {
-          title: title + " - deliveries id",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/deliveries/View.vue")
-      },
-      {
-        path: "/deliveries/edit/:id",
-        name: "DeliveriesEditId",
-        meta: {
-          title: title + " - deliveries id",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/deliveries/Edit.vue"),
-        beforeEnter: requireOauth()
-      },
-      /**
        * Comments
        * /comments : 다건 리스트 조회
        * /comments/edit : 단건 추가
@@ -461,102 +366,6 @@ const routes = [
           breadcrumb: [{ name: "", link: "" }]
         },
         component: () => import("../views/comments/Edit.vue"),
-        beforeEnter: requireOauth()
-      },
-      /**
-       * Carts
-       * /carts : 다건 리스트 조회
-       * /carts/edit : 단건 추가
-       * /carts/:id : 단건 조회
-       * /carts/edit/:id : 단건 수정
-       */
-
-      {
-        path: "/carts",
-        name: "Carts",
-        meta: {
-          title: title + " - carts",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/carts/List.vue"),
-        beforeEnter: requireOauth()
-      },
-      {
-        path: "/carts/edit",
-        name: "CartsEdit",
-        meta: {
-          title: title + " - carts id",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/carts/Edit.vue"),
-        beforeEnter: requireOauth()
-      },
-      {
-        path: "/carts/:id",
-        name: "CartsId",
-        meta: {
-          title: title + " - carts id",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/carts/View.vue"),
-        beforeEnter: requireOauth()
-      },
-      {
-        path: "/carts/edit/:id",
-        name: "CartsEditId",
-        meta: {
-          title: title + " - carts id",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/carts/Edit.vue"),
-        beforeEnter: requireOauth()
-      },
-      /**
-       * Addresses
-       * /addresses : 다건 리스트 조회
-       * /addresses/edit : 단건 추가
-       * /addresses/:id : 단건 조회
-       * /addresses/edit/:id : 단건 수정
-       */
-
-      {
-        path: "/addresses",
-        name: "Addresses",
-        meta: {
-          title: title + " - addresses",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/addresses/List.vue"),
-        beforeEnter: requireOauth()
-      },
-      {
-        path: "/addresses/edit",
-        name: "AddressesEdit",
-        meta: {
-          title: title + " - addresses id",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/addresses/Edit.vue"),
-        beforeEnter: requireOauth()
-      },
-      {
-        path: "/addresses/:id",
-        name: "AddressesId",
-        meta: {
-          title: title + " - addresses id",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/addresses/View.vue"),
-        beforeEnter: requireOauth()
-      },
-      {
-        path: "/addresses/edit/:id",
-        name: "AddressesEditId",
-        meta: {
-          title: title + " - addresses id",
-          breadcrumb: [{ name: "", link: "" }]
-        },
-        component: () => import("../views/addresses/Edit.vue"),
         beforeEnter: requireOauth()
       }
     ]

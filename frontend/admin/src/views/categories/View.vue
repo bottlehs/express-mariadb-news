@@ -16,10 +16,10 @@ import { mapGetters } from "vuex";
 /**
  * service
  */
-import AddressesService from "@/services/addresses.service.js";
+import CategoriesService from "@/services/categories.service.js";
 
 export default {
-  name: "AddressesView",
+  name: "CategoriesView",
   components: {
     /**
      * components
@@ -77,7 +77,7 @@ export default {
      */
     findOne() {
       this.wait = true;
-      AddressesService.findOne(this.id).then(
+      CategoriesService.findOne(this.id).then(
         response => {
           const { data } = response;
           this.item = data;

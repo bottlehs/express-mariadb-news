@@ -1,8 +1,8 @@
 import http from "@/common/http";
 import authHeader from "@/common/auth.header";
-const SERVICE_API_URL = "/api/products/options";
+const SERVICE_API_URL = "/api/categories";
 
-class ProductsOptionsService {
+class CategoriesService {
   findAll(params = {}) {
     return http.get(SERVICE_API_URL, {
       params: params,
@@ -36,4 +36,4 @@ class ProductsOptionsService {
   }
 }
 
-export default new ProductsOptionsService();
+export default new CategoriesService();

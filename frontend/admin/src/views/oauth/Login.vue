@@ -72,8 +72,8 @@ export default {
       wait: false,
       formWait: false,
       form: {
-        email: "",
-        password: ""
+        email: "57fb9c66-d1ec-42ac-81a6-a076557246ea@email.com",
+        password: "password123"
       }
     };
   },

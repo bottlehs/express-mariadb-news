@@ -5,37 +5,37 @@
     </div>
     <div v-else>
       <ValidationObserver v-slot="{ invalid }">
-        <form @submit.prevent="onSubmit" @reset="onReset">
+        <b-form @submit.prevent="onSubmit" @reset="onReset">
           <ValidationProvider
             ref="validationFormEmail"
-            name="이메일"
+            :name="$t('user_email')"
             rules="required|email"
             v-slot="{ errors }"
           >
             <label>
-              이메일
+              {{ $t("user_email") }}
               <input
                 ref="formEmail"
                 type="text"
                 v-model="form.email"
-                placeholder="이메일 입력"
+                :placeholder="$t('user_email')"
               />
               {{ errors[0] }}
             </label>
           </ValidationProvider>
           <ValidationProvider
             ref="validationFormPassword"
-            name="비밀번호"
+            :name="$t('users_password')"
             rules="required"
             v-slot="{ errors }"
           >
             <label>
-              비밀번호
+              {{ $t("users_password") }}
               <input
                 ref="formPassword"
                 type="password"
                 v-model="form.password"
-                placeholder="비밀번호 입력"
+                :placeholder="$t('users_password')"
               />
               {{ errors[0] }}
             </label>
@@ -43,109 +43,128 @@
 
           <ValidationProvider
             ref="validationFormFirstname"
-            name="이름"
+            :name="$t('users_firstname')"
             rules="required"
             v-slot="{ errors }"
           >
             <label>
-              이름
+              {{ $t("users_firstname") }}
               <input
                 ref="formFirstname"
                 type="text"
                 v-model="form.firstname"
-                placeholder="이름 입력"
+                :placeholder="$t('users_firstname')"
               />
               {{ errors[0] }}
             </label>
           </ValidationProvider>
           <ValidationProvider
             ref="validationFormLastname"
-            name="성"
+            :name="$t('users_lastname')"
             rules="required"
             v-slot="{ errors }"
           >
             <label>
-              성
+              {{ $t("users_lastname") }}
               <input
                 ref="formLastname"
                 type="text"
                 v-model="form.lastname"
-                placeholder="성 입력"
+                :placeholder="$t('users_lastname')"
               />
               {{ errors[0] }}
             </label>
           </ValidationProvider>
           <ValidationProvider
             ref="validationFormUsername"
-            name="회원이름"
+            :name="$t('users_username')"
             rules="required"
             v-slot="{ errors }"
           >
             <label>
-              회원이름
+              {{ $t("users_username") }}
               <input
                 ref="formUsername"
                 type="text"
                 v-model="form.username"
-                placeholder="회원이름 입력"
+                :placeholder="$t('users_username')"
               />
               {{ errors[0] }}
             </label>
           </ValidationProvider>
           <ValidationProvider
             ref="validationFormLanguege"
-            name="언어"
+            :name="$t('users_languege')"
             rules="required"
             v-slot="{ errors }"
           >
             <label>
-              언어
+              {{ $t("users_languege") }}
               <input
                 ref="formLanguege"
                 type="text"
                 v-model="form.languege"
-                placeholder="언어 입력"
+                :placeholder="$t('users_languege')"
               />
               {{ errors[0] }}
             </label>
           </ValidationProvider>
           <ValidationProvider
             ref="validationFormCountry"
-            name="언어"
+            :name="$t('users_country')"
             rules="required"
             v-slot="{ errors }"
           >
             <label>
-              언어
+              {{ $t("users_country") }}
               <input
                 ref="formCountry"
                 type="text"
                 v-model="form.country"
-                placeholder="언어 입력"
+                :placeholder="$t('users_country')"
               />
               {{ errors[0] }}
             </label>
           </ValidationProvider>
           <ValidationProvider
             ref="validationFormStatus"
-            name="상태"
+            :name="$t('users_status')"
             rules="required"
             v-slot="{ errors }"
           >
             <label>
-              상태
+              {{ $t("users_status") }}
               <input
                 ref="formStatus"
                 type="text"
                 v-model="form.status"
-                placeholder="상태 입력"
+                :placeholder="$t('users_status')"
               />
               {{ errors[0] }}
             </label>
           </ValidationProvider>
 
-          <button type="submit" :disabled="invalid || formWait"></button>
-        </form>
+          <b-button type="submit" :disabled="invalid || formWait">
+            <b-spinner
+              v-if="formWait && formAction == 'onSubmit'"
+              small
+            ></b-spinner
+            >{{ id ? $t("modify") : $t("add") }}
+          </b-button>
+          <b-button type="reset" :disabled="formWait">{{ $t("cancel") }}</b-button>
+          <b-button
+            v-if="id"
+            type="button"
+            @click.prevent.stop="remove"
+            :disabled="formWait"
+          >
+            <b-spinner
+              v-if="formWait && formAction == 'remove'"
+              small
+            ></b-spinner
+            >{{ $t("remove") }}
+          </b-button>
+        </b-form>
       </ValidationObserver>
     </div>
   </div>
@@ -179,6 +198,7 @@ export default {
        * item : 응답 데이터
        * wait : 로딩
        * formWait : 폼 로딩
+       * formAction : 폼 액션
        * form : 폼
        */
 
@@ -186,6 +206,7 @@ export default {
       item: {},
       wait: false,
       formWait: false,
+      formAction: "",
       form: {
         /**
          * email : 이메일
@@ -242,6 +263,92 @@ export default {
     /**
      * methods
      */
+    async onSubmit(evt) {
+      evt.preventDefault();
+
+      this.formWait = true;
+      this.formAction = 'onSubmit';
+
+      let params = {
+        email: this.form.email,
+        password: this.form.password,
+        firstname: this.form.firstname,
+        lastname: this.form.lastname,
+        username: this.form.username,
+        languege: this.form.languege,
+        country: this.form.country,
+        status: this.form.status
+      };
+
+      if (this.id) {
+        // 수정
+        UsersService.modify(this.id, params).then(
+          response => {
+            const { data } = response;
+            this.item = data;
+
+            alert(this.$t("successful"));
+            this.$router.go(-1);
+
+            this.formWait = false;
+          },
+          error => {
+            alert(this.$t("failure"));
+            console.log(error);
+          }
+        );
+      } else {
+        // 등록
+        UsersService.add(params).then(
+          response => {
+            const { data } = response;
+            this.item = data;
+
+            alert(this.$t("successful"));
+            this.$router.go(-1);
+
+            this.formWait = false;
+          },
+          error => {
+            if (
+              Object.prototype.hasOwnProperty.call(response.data, "message")
+            ) {
+              alert(response.data.message);
+            } else {
+              alert(this.$t("failure"));
+            }
+            console.log(error);
+          }
+        );
+      }
+    },
+    onReset(evt) {
+      evt.preventDefault();
+
+      this.$router.go(-1);
+    },
+    remove() {
+      if (confirm(this.$t("remove_text"))) {
+        this.formWait = true;
+        this.formAction = 'remove';
+
+        UsersService.remove(this.id).then(
+          response => {
+            const { data } = response;
+            this.item = data;
+
+            alert(this.$t("successful"));
+            this.$router.go(-1);
+
+            this.formWait = false;
+          },
+          error => {
+            alert(this.$t("failure"));
+            console.log(error);
+          }
+        );
+      }
+    },
     findOne() {
       this.wait = true;
       UsersService.findOne(this.id).then(
