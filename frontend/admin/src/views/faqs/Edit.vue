@@ -65,7 +65,9 @@
             ></b-spinner
             >{{ id ? $t("modify") : $t("add") }}
           </b-button>
-          <b-button type="reset" :disabled="formWait">{{ $t("cancel") }}</b-button>
+          <b-button type="reset" :disabled="formWait">{{
+            $t("cancel")
+          }}</b-button>
           <b-button
             v-if="id"
             type="button"
@@ -170,7 +172,7 @@ export default {
       evt.preventDefault();
 
       this.formWait = true;
-      this.formAction = 'onSubmit';
+      this.formAction = "onSubmit";
 
       let params = {
         question: this.form.question,
@@ -228,7 +230,7 @@ export default {
     remove() {
       if (confirm(this.$t("remove_text"))) {
         this.formWait = true;
-        this.formAction = 'remove';
+        this.formAction = "remove";
 
         FaqsService.remove(this.id).then(
           response => {
